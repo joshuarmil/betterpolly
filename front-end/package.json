@@ -1,0 +1,27 @@
+{
+  "name": "polyanna",
+  "version": "1.0.0",
+  "description": "Front end for Polyanna application to provide an ad free easy to use Secret Santa or Polyanna web app",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "github.com/ptravers/polyanna"
+  },
+  "keywords": [
+    "polyanna",
+    "secret",
+    "santa"
+  ],
+  "author": "Peter Travers",
+  "license": "MIT",
+  "dependencies": {
+    "selenium-webdriver": "^4.0.0-alpha.1"
+  },
+  "devDependencies": {
+    "webpack": "^4.16.1",
+    "webpack-cli": "^3.1.0"
+  }
+}
