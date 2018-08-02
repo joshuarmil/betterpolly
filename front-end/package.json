@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "github.com/ptravers/polyanna"
+    "url": ""
   },
   "keywords": [
     "polyanna",
@@ -18,7 +18,6 @@
   "author": "Peter Travers",
   "license": "MIT",
   "dependencies": {
-    "selenium-webdriver": "^4.0.0-alpha.1"
   },
   "devDependencies": {
     "webpack": "^4.16.1",
