@@ -6,15 +6,31 @@ const port = 3000;
 const authority = host + ":" + port;
 const uri = "http://" + authority;
 
+var webdriver = require('selenium-webdriver');
+
+var chromeCapabilities = webdriver.Capabilities.chrome();
+var chromeOptions = {
+    'args': ['--test-type', '--start-maximized', '--no-sandbox', '--disable-dev-shm-usage']
+};
+chromeCapabilities.set('chromeOptions', chromeOptions);
+
+var driver_fx = new webdriver.Builder()
+  .forBrowser('firefox')
+  .build();
+
+var driver_chr = new webdriver.Builder()
+  .forBrowser('chrome')
+  .withCapabilities(chromeCapabilities)
+  .build();
+
 var runTests = 
-  (async function (browser) {
-    let driver = await new Builder().forBrowser(browser).build();
+  (async function (driver) {
     let expectedMessage = "Welcome to our Secret Santa or Polyanna site! You can now easily send emails to all your friends and start a secret santa!";
     try {
       await driver.get(uri + "/");
       let element = await driver
-		    .findElement(By.name('about'))
-		    .getText()
+        .findElement(By.name('about'))
+        .getText()
 		    .then(function(text) {
                        let testMessage = "Is the about page present and does it contain expecected text\n" + expectedMessage + "actual\n" + text;
                        Assert(expectedMessage == text, testMessage);
@@ -26,5 +42,6 @@ var runTests =
     }
   });
 
-runTests('firefox')
-runTests('chrome')
+
+runTests(driver_fx)
+runTests(driver_chr)
