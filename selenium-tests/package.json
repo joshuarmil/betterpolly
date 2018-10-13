@@ -5,6 +5,7 @@
   "main": "test_homepage_exists.js",
   "scripts": {
     "test": "node test_homepage_exists.js"
+    "testwsl": "node test_homepage_exists_wsl.js"
   },
   "author": "",
   "license": "MIT",
