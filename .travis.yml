@@ -4,7 +4,5 @@ node_js:
 cache:
   directories:
     - node_modules
-before_install:
-  - export PATH=/home/travis/build/joshuarmil/betterpolly/back-end:$PATH
 script:
-  - npm test
+  - node back-end/main.js
