@@ -5,5 +5,5 @@ cache:
   directories:
     - node_modules
 script:
-  - node back-end/main.js
+  - node back-end/main.js &
   - node selenium-tests/test_homepage_exists.js
