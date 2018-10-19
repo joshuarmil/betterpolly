@@ -1,5 +1,6 @@
 #!/bin/bash
 node back-end/bin/www &
+node back-end/main.js &
 server=$!
 echo $result
 while true; do
@@ -9,6 +10,6 @@ while true; do
 		break
 	fi
 done
-node selenium-tests/test_homepage_exists_wsl.js
+node selenium-tests/test_homepage_exists.js
 pnode=$(pidof node)
 kill -9 $pnode
