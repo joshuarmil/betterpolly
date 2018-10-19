@@ -4,7 +4,8 @@
   "description": "End to end test suite for Polyanna appication",
   "main": "test_homepage_exists.js",
   "scripts": {
-    "test": "node test_homepage_exists.js"
+    "test": "node test_homepage_exists.js",
+    "testwsl": "node test_homepage_exists_wsl.js"
   },
   "author": "",
   "license": "MIT",
