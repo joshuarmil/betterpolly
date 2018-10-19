@@ -4,6 +4,12 @@ node_js:
 cache:
   directories:
     - node_modules
+
+before_install:
+  - cd selenium-tests
+  - npm install
+  - cd ..
+
 script:
   - node back-end/main.js &
   - node selenium-tests/test_homepage_exists.js
