@@ -16,6 +16,8 @@ var chromeOptions = {
     '--no-sandbox',
     '--disable-dev-shm-usage',
     '--disable-gpu',
+    '--disable-extensions',
+    '--disable-infobars',
   ],
 };
 chromeCapabilities.set('chromeOptions', chromeOptions);

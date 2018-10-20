@@ -1,0 +1,15 @@
+#!/usr/bin/env node
+
+/**
+ * Module dependencies.
+ */
+
+const express = require('express');
+const app = require('../main.js');
+const port = 3000;
+
+/**
+ * Listen on provided port, on all network interfaces.
+ */
+
+app.listen(port, () => console.log(`App started on port: ${port}`));

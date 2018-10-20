@@ -1,18 +1,19 @@
-const http = require('http');
-const fs = require('fs');
+const express = require('express');
+const logger = require('morgan');
+const app = express();
+const path = require('path');
 
-const hostname = '127.0.0.1';
-const port = 3000;
+app.use(logger('dev'));
 
-const server = http.createServer((req, res) => {
-	fs.readFile('views/home.html', function(err, data) {
-          res.statusCode = 200;
-          res.setHeader('Content-Type', 'text/html');
-          res.write(data);
-          res.end();
-	});
+app.get('/', function(req, res) {
+	res.sendFile(path.join(__dirname + '/views/home.html'));
 });
 
-server.listen(port, hostname, () => {
-  console.log(`Server running at http://${hostname}:${port}/`);
-})
+app.get('/status', function(req, res) {
+	res.statusCode = 200;
+	res.setHeader('Content-Type', 'text/plain');
+	res.write('UP');
+	res.end();
+});
+
+module.exports = app;
