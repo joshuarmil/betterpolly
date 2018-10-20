@@ -1,18 +1,26 @@
-language: node_js
-node_js:
-  - 'stable'
+dist: bionic
 cache:
   directories:
     - node_modules
-
+language: node_js
+addons:
+  chrome: stable
+  firefox: stable
+node_js:
+  - 'stable'
 before_install:
   - npm install -g selenium-webdriver
-  - npm install -g geckodriver
-  - npm install -g chromedriver
-  - npm install -g get-firefox
-  - wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-  - sudo dpkg -i google-chrome*.deb
+  - wget https://github.com/mozilla/geckodriver/releases/download/v0.23.0/geckodriver-v0.23.0-linux64.tar.gz
+  - mkdir geckodriver
+  - tar -xzf geckodriver-v0.23.0-linux64.tar.gz -C geckodriver
+  - export PATH=$PATH:$PWD/geckodriver
+  - wget -N http://chromedriver.storage.googleapis.com/2.43/chromedriver_linux64.zip -P ~/
+  - unzip ~/chromedriver_linux64.zip -d ~/
+  - rm ~/chromedriver_linux64.zip
+  - sudo mv -f ~/chromedriver /usr/local/share/
+  - sudo chmod +x /usr/local/share/chromedriver
+  - sudo ln -s /usr/local/share/chromedriver /usr/local/bin/chromedriver
 
 script:
-  - node back-end/main.js &
+  - node back-end/bin/www &
   - node selenium-tests/test_homepage_exists.js
