@@ -21,6 +21,8 @@ node_js:
   - 'stable'
 before_install:
   - sudo apt-get update -q
+  - npm install selenium-standalone@latest -g
+  - selenium-standalone install && selenium-standalone start
   #- npm install -g selenium-webdriver
   - sudo apt-get install -y chromium-chromedriver
   - wget https://github.com/mozilla/geckodriver/releases/download/v0.23.0/geckodriver-v0.23.0-linux64.tar.gz
@@ -30,6 +32,12 @@ before_install:
   - chmod +x geckodriver
   - sudo cp geckodriver /usr/local/bin/
   - npm install express --no-save
+
+before_script:
+  - export DISPLAY=:99.0
+  - sh -e /etc/init.d/xvfb start
+  - npm i -g npm@^3
+  - sleep 3
 
 script:
   - node back-end/bin/www &
