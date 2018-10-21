@@ -28,7 +28,7 @@ before_install:
   - tar -xvzf geckodriver-v0.23.0-linux64.tar.gz
   - rm geckodriver-v0.23.0-linux64.tar.gz
   - chmod +x geckodriver
-  - cp geckodriver /usr/local/bin/
+  - sudo cp geckodriver /usr/local/bin/
   - npm install express --no-save
 
 script:
