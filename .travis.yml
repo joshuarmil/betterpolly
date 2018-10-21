@@ -26,17 +26,13 @@ before_install:
   - npm install selenium-standalone@latest -g
   - selenium-standalone install
   - wget https://chromedriver.storage.googleapis.com/2.43/chromedriver_linux64.zip
-  - mkdir chromedriver
   - unzip -u chromedriver_linux64.zip
-  - rm chromedriver_linux64.zip
   - chmod +x chromedriver
-  - sudo cp -r chromedriver /usr/local/bin/
+  - sudo mv chromedriver /usr/local/bin/ 
   - wget https://github.com/mozilla/geckodriver/releases/download/v0.23.0/geckodriver-v0.23.0-linux64.tar.gz
-  - mkdir geckodriver
   - tar -xvzf geckodriver-v0.23.0-linux64.tar.gz
-  - rm geckodriver-v0.23.0-linux64.tar.gz
   - chmod +x geckodriver
-  - sudo cp -r geckodriver /usr/local/bin/
+  - sudo mv geckodriver /usr/local/bin/
   - npm install express --no-save
   - cd back-end
   - npm install
