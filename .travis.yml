@@ -7,7 +7,7 @@ language: node_js
 env:
   - MOZ_HEADLESS=1
 addons:
-  chrome: stable
+  #chrome: stable
   firefox: latest
 
 addons:
@@ -25,6 +25,9 @@ before_install:
   - sudo apt-get update -q
   - npm install selenium-standalone@latest -g
   - selenium-standalone install
+  - export CHROME_BIN=/usr/bin/google-chrome
+  - wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+  - sudo dpkg -i google-chrome*.deb
   - wget https://chromedriver.storage.googleapis.com/2.43/chromedriver_linux64.zip
   - unzip -u chromedriver_linux64.zip
   - chmod +x chromedriver
