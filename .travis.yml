@@ -32,6 +32,12 @@ before_install:
   - chmod +x geckodriver
   - sudo cp geckodriver /usr/local/bin/
   - npm install express --no-save
+  - cd back-end
+  - npm install
+  - cd ..
+  - cd selenium-tests
+  - npm install
+  - cd ..
 
 before_script:
   - export DISPLAY=:99.0
