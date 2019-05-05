@@ -1,14 +1,20 @@
 {
+  "name": "Best Polly Ever",
+  "description": "This app does one little thing, and does it well.",
+  "website": "https://bestpollyever.herokuapp.com/",
+  "repository": "https://github.com/joshuarmil/betterpolly",
+  "success_url": "/",
+  "image": "heroku/nodejs",
+  "addons": [],
   "buildpacks": [
     {
-      "url": "heroku/nodejs"
+      "url": "https://github.com/heroku/heroku-buildpack-nodejs#v148"
     }
   ],
   "environments": {
     "test": {
       "scripts": {
-        "test-setup": "echo \"Error: no test specified\" && exit 0",
-        "test": "echo \"Error: no test specified\" && exit 0"
+        "test": ""
       }
     }
   }
