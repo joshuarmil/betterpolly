@@ -9,7 +9,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.get('/', function(req, res) {
-	res.sendFile(path.join(__dirname + '/views/test.html'));
+	res.sendFile(path.join(__dirname + '/views/home.html'));
 });
 
 app.get('/status', function(req, res) {
