@@ -1,13 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="pollyForm.js"></script>
   </head>
   <body>
     <div name="about">
-      <h1>Welcome to our Secret Santa or Polyanna site! You can now easily send emails to all your friends and start a secret santa!</h1>
+      <h1>
+        Welcome to our Secret Santa or Polyanna site! You can now easily send
+        emails to all your friends and start a secret santa!
+      </h1>
+      <form name="pollyInfo" action="/post" method="POST">
+        <div class="masterData">
+          Master Name: 
+          <input type="text" name="masterName" />
+          Master Family:
+          <input type="text" name="masterFamily" />
+          Master Email Address:
+          <input type="text" name="masterEmail" size="40" />
+        </div>
+        <div class="userData">
+          User Name: 
+          <input type="text" name="userName" />
+          User Family:
+          <input type="text" name="userFamily" />
+          User Email Address:
+          <input type="text" name="userEmail" size="40" />
+        </div>
+        <button type="button" id="addUser" onclick="f1()"/>
+          Add user
+        </button>
+        <button type="button" id="Save" onclick="f1()"/>
+          Submit
+        </button>
+        <tag id="Success" style="color:green;"></p>
+      </form>
     </div>
   </body>
 </html>
