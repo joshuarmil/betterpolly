@@ -12,7 +12,7 @@
     "Santa",
     "Polyanna"
   ],
-  "author": "Josh Miller and Peter Travers",
+  "author": "Josh Miller",
   "license": "MIT",
   "dependencies": {
     "debug": "^4.1.0",
