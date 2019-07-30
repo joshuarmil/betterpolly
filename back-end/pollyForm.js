@@ -6,6 +6,11 @@ window.onload = function() {
 					name: document.forms['pollyInfo']['userName'][0].value,
 					family: document.forms['pollyInfo']['userFamily'][0].value,
 					email: document.forms['pollyInfo']['userEmail'][0].value
+				},
+				{
+					name: document.forms['pollyInfo']['userName'][1].value,
+					family: document.forms['pollyInfo']['userFamily'][1].value,
+					email: document.forms['pollyInfo']['userEmail'][1].value
 				}
 			],
 			master: {
@@ -15,7 +20,7 @@ window.onload = function() {
 			}
 		};
 		const userList = document.querySelectorAll('.userData');
-		for (a = 1; a < userList.length; a++) {
+		for (a = 2; a < userList.length; a++) {
 			pollyJSON.users.push({
 				name: document.forms['pollyInfo']['userName'][a].value,
 				family: document.forms['pollyInfo']['userFamily'][a].value,
