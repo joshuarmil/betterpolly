@@ -5,7 +5,8 @@
   "main": "back-end/main.js",
   "scripts": {
     "test": "mocha ./back-end/tests --recursive",
-    "start": "node back-end/bin/www"
+    "start": "node back-end/bin/www",
+    "dev": "nodemon backend/bin/www"
   },
   "keywords": [
     "Secret",
@@ -26,6 +27,7 @@
   },
   "devDependencies": {
     "chai": "^4.2.0",
-    "mocha": "^6.2.0"
+    "mocha": "^6.2.0",
+    "nodemon": "^1.19.1"
   }
 }

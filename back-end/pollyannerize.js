@@ -2,6 +2,11 @@ module.exports = {
 	pollyannerize: (req, res) => {
 		/* Accepts a formatted user/master list, shuffles users,
 		and emails each user a match, and the master all matches */
+		if (!req.body.master.email) {
+			return res.send(
+				'An error occured: Master Email is a required parameter'
+			);
+		}
 
 		const nodemailer = require('nodemailer');
 		const matchMap = new Map();

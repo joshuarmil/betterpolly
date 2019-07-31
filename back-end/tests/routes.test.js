@@ -3,12 +3,12 @@ const { pollyannerize } = require('../pollyannerize');
 
 let req = {
 	body: {
-		users:{},
+		users: {},
 		master: {}
 	}
 };
 
-les res = {
+let res = {
 	sendCalledWith: ' ',
 	send: function(arg) {
 		this.sendCalledWith = arg;
@@ -17,7 +17,7 @@ les res = {
 
 describe('Pollyannerize Route', function() {
 	it('Should error out if no master email is provided', function() {
-		pollyannerize(req,res);
+		pollyannerize(req, res);
 		expect(res.sendCalledWith).to.contain('error');
 	});
 });
