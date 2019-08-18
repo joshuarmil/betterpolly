@@ -1,11 +1,12 @@
 const express = require('express');
+require('dotenv').config();
 const logger = require('morgan');
 const bodyParser = require('body-parser');
 const app = express();
 const path = require('path');
 const request = require('request');
-const dotenv = require('dotenv').config();
 const polly = require('./pollyannerize');
+const nodemailer = require('nodemailer');
 
 app.use(logger('dev'));
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -23,6 +24,22 @@ app.get('/status', (req, res) => {
 	res.sendStatus(200);
 });
 
-app.post('/pollyannerize', polly.pollyannerize);
+const transporter = nodemailer.createTransport({
+	service: 'gmail',
+	auth: {
+		user: process.env.EMAILADDRESS,
+		pass: process.env.EMAILPASS
+	}
+});
+
+const sendEmail = email => {
+	transporter.sendMail(email, function(err, info) {
+		if (err) console.log(err);
+		else console.log(info);
+	});
+};
+
+app.post('/pollyannerize', polly.pollyannerize(sendEmail));
+
 
 module.exports = app;

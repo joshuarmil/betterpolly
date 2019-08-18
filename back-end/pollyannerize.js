@@ -1,10 +1,10 @@
 module.exports = {
-	pollyannerize: (req, res) => {
+	pollyannerize: sendEmail => (req, res) => {
 		/* Accepts a formatted user/master list, shuffles users,
 		and emails each user a match, and the master all matches */
 		if (!req.body.master.email) {
 			return res.send(
-				'An error occured: Master Email is a required parameter'
+				'An error occurred: Master Email is a required parameter'
 			);
 		}
 
@@ -30,17 +30,20 @@ module.exports = {
 
 		let userList = '';
 
+		let eachUser = [];
+
 		for (const [mapUser, mapMatch] of matchMap.entries()) {
 			userList += mapUser.name + ' has ' + mapMatch.name + '\n';
+			eachUser.push(mapUser.name);
 		}
 
-		const transporter = nodemailer.createTransport({
-			service: 'gmail',
-			auth: {
-				user: process.env.EMAILADDRESS,
-				pass: process.env.EMAILPASS
-			}
-		});
+		const userSet = new Set(eachUser);
+
+		if (userSet.size != req.body.users.length) {
+			return res.send(
+				'An error occurred: Check for potential duplicate names'
+			);
+		}
 
 		const masterEmail = req.body.master.email;
 		const masterName = req.body.master.name;
@@ -61,16 +64,12 @@ module.exports = {
 		let userName;
 		let matchName;
 
-		transporter.sendMail(masterOptions, function(err, info) {
-			if (err) console.log(err);
-			else console.log(info);
-		});
+		sendEmail(masterOptions);
 
 		for (const [key, value] of matchMap.entries()) {
 			userEmail = key.email;
 			userName = key.name;
 			matchName = value.name;
-			console.log(userEmail, userName, matchName);
 			const userOptions = {
 				from: process.env.EMAILADDRESS,
 				to: userEmail,
@@ -82,10 +81,7 @@ module.exports = {
 					'Your pollyanna match is:\n' +
 					matchName
 			};
-			transporter.sendMail(userOptions, function(err, info) {
-				if (err) console.log(err);
-				else console.log(info);
-			});
+			sendEmail(userOptions);
 		}
 
 		return res.send(req.body);
