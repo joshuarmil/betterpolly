@@ -4,4 +4,3 @@ front-end/node_modules/*
 back-end/node_modules/*
 selenium-tests/node_modules/*
 node_modules/*
-.env
