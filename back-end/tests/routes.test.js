@@ -1,6 +1,13 @@
 const expect = require("chai").expect;
 const { pollyannerize } = require("../pollyannerize");
 
+let res = {
+	sendCalledWith: " ",
+	send: function(arg) {
+		this.sendCalledWith = arg;
+	}
+};
+
 describe("Pollyannerize Route", function() {
 	it("Should error out if no master email is provided", function() {
 		let req = {
@@ -10,12 +17,6 @@ describe("Pollyannerize Route", function() {
 			}
 		};
 
-		let res = {
-			sendCalledWith: " ",
-			send: function(arg) {
-				this.sendCalledWith = arg;
-			}
-		};
 		pollyannerize(null)(req, res);
 		expect(res.sendCalledWith).to.contain("error");
 	});
@@ -47,13 +48,6 @@ describe("Pollyannerize Route", function() {
 			}
 		};
 
-		let res = {
-			sendCalledWith: " ",
-			send: function(arg) {
-				this.sendCalledWith = arg;
-			}
-		};
-
 		let sentEmail = null;
 
 		const sendEmail = email => {
@@ -75,13 +69,6 @@ describe("Pollyannerize Route", function() {
 			}
 		};
 
-		let res = {
-			sendCalledWith: " ",
-			send: function(arg) {
-				this.sendCalledWith = arg;
-			}
-		};
-
 		let sentEmail = null;
 
 		const sendEmail = email => {
@@ -90,40 +77,6 @@ describe("Pollyannerize Route", function() {
 
 		pollyannerize(sendEmail)(req, res);
 		expect(sentEmail.to).to.contain(req.body.master.email);
-	});
-	it("Should send a user an email", function() {
-		let req = {
-			body: {
-				users: [
-					{
-						name: "userName",
-						family: "userFamily",
-						email: "userEmail"
-					}
-				],
-				master: {
-					name: "masterName",
-					family: "masterFamily",
-					email: "masterEmail"
-				}
-			}
-		};
-
-		let res = {
-			sendCalledWith: " ",
-			send: function(arg) {
-				this.sendCalledWith = arg;
-			}
-		};
-
-		let sentEmail = null;
-
-		const sendEmail = email => {
-			sentEmail = email;
-		};
-
-		pollyannerize(sendEmail)(req, res);
-		expect(sentEmail.to).to.contain(req.body.users[0].email);
 	});
 	it("Should send every user an email", function() {
 		let req = {
@@ -153,20 +106,13 @@ describe("Pollyannerize Route", function() {
 			}
 		};
 
-		let res = {
-			sendCalledWith: " ",
-			send: function(arg) {
-				this.sendCalledWith = arg;
-			}
-		};
-
-		let sentEmail = [];
+		let sentEmails = [];
 
 		const sendEmail = email => {
-			sentEmail.push(email.to);
+			sentEmails.push(email.to);
 		};
 
 		pollyannerize(sendEmail)(req, res);
-		expect(sentEmail).to.have.lengthOf(req.body.users.length + 1); // Add 1 for Master
+		expect(sentEmails).to.have.lengthOf(req.body.users.length + 1); //All users plus master
 	});
 });
