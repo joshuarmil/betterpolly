@@ -18,6 +18,7 @@ var chromeOptions = {
     '--disable-gpu',
     '--disable-extensions',
     '--disable-infobars',
+    '--headless',
   ],
 };
 chromeCapabilities.set('chromeOptions', chromeOptions);

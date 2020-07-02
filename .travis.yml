@@ -1,0 +1,56 @@
+dist: trusty
+sudo: required
+cache:
+  directories:
+    - node_modules
+language: node_js
+env:
+  - MOZ_HEADLESS=1
+addons:
+  #chrome: stable
+  firefox: latest
+
+addons:
+  apt:
+    #sources:
+    #  - google-chrome
+    #packages:
+    #  - google-chrome-stable
+    update: true
+
+
+node_js:
+  - 'stable'
+before_install:
+  - sudo apt-get update -q
+  - npm install selenium-standalone@latest -g
+  - selenium-standalone install
+  - export CHROME_BIN=/usr/bin/google-chrome
+  - wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+  - sudo dpkg -i google-chrome*.deb
+  - wget https://chromedriver.storage.googleapis.com/2.43/chromedriver_linux64.zip
+  - unzip -u chromedriver_linux64.zip
+  - chmod +x chromedriver
+  - sudo mv chromedriver /usr/local/bin/ 
+  - wget https://github.com/mozilla/geckodriver/releases/download/v0.23.0/geckodriver-v0.23.0-linux64.tar.gz
+  - tar -xvzf geckodriver-v0.23.0-linux64.tar.gz
+  - chmod +x geckodriver
+  - sudo mv geckodriver /usr/local/bin/
+  - npm install express --no-save
+  - cd back-end
+  - npm install
+  - cd ..
+  - cd selenium-tests
+  - npm install
+  - cd ..
+  - selenium-standalone start &
+
+before_script:
+  - export DISPLAY=:99.0
+  - sh -e /etc/init.d/xvfb start
+  - npm i -g npm@^3
+  - sleep 3
+
+script:
+  - node back-end/bin/www &
+  - node selenium-tests/test_homepage_exists.js

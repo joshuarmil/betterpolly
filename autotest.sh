@@ -1,6 +1,5 @@
 #!/bin/bash
 node back-end/bin/www &
-node back-end/main.js &
 server=$!
 echo $result
 while true; do
